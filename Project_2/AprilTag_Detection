@@ -1,1 +1,72 @@
+import cv2
+import numpy as np
+from apriltag import apriltag
 
+def calculate_center(rect):
+    # Calculate the center of the rectangle
+    center_x = int((rect[0][0][0] + rect[2][0][0]) / 2)
+    center_y = int((rect[0][0][1] + rect[2][0][1]) / 2)
+    return center_x, center_y
+
+def estimate_distance(apparent_width, tag_size, focal_length):
+    # Estimate the distance using the pinhole camera model
+    distance = (tag_size * focal_length) / apparent_width
+    return distance
+
+def main():
+    # Camera parameters (example values, replace with your camera's parameters)
+    focal_length = 150  # in pixels
+    tag_size = 0.16  # size of the AprilTag in meters
+
+    # Create an AprilTag detector
+    detector = apriltag("tag36h11")
+
+    # Open a connection to the webcam (usually, 0 represents the default camera)
+    cap = cv2.VideoCapture(0)
+
+    # Set the resolution to 160x120
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 160)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 120)
+
+    while True:
+        # Capture a frame from the webcam
+        ret, frame = cap.read()
+
+        # Resize the frame to 160x120
+        frame = cv2.resize(frame, (160, 120))
+
+        # Convert the frame to grayscale for AprilTag detection
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        # Detect AprilTags in the frame
+        detections = detector.detect(gray)
+
+        # Draw bounding boxes around detected AprilTags and estimate distance
+        if len(detections) > 0:
+            for detection in detections:
+                rect = detection["lb-rb-rt-lt"]
+                rect = np.array(rect, dtype=np.int32).reshape((-1, 1, 2))
+                cv2.polylines(frame, [rect], True, (0, 255, 0), 2)
+
+                # Calculate and print the center coordinates
+                center = calculate_center(rect)
+                print("Center Coordinates:", center)
+
+                # Estimate and print the distance
+                apparent_width = abs(rect[0][0][0] - rect[1][0][0])
+                distance = estimate_distance(apparent_width, tag_size, focal_length)
+                print("Estimated Distance:", distance)
+
+        # Display the frame with AprilTag detections
+        cv2.imshow("AprilTag Detection", frame)
+
+        # Break the loop if 'q' is pressed
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    # Release the webcam and close all windows
+    cap.release()
+    cv2.destroyAllWindows()
+
+if __name__ == "__main__":
+    main()
