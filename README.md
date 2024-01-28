@@ -1,6 +1,8 @@
 # ROS2_Turtlebot_Tutorial
 This is a ROS2 Foxy tutorial, enabling everyone to achieve the results of the Demo_Final.
 You can gradually achieve the goal by working on different projects
+![image](https://github.com/StanleyChueh/Turtlebot_ROS2_Tutorial/assets/153347369/4c8e18c9-aa37-4723-9c43-34aed35cc301)
+
 
 # Download ROS2 Foxy from this link and follow the Quickstart guide step by step.
 ### https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/
