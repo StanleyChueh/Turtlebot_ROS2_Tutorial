@@ -7,7 +7,7 @@ You can gradually achieve the goal by working on different projects
 
 # Repository Structure
 ## Project_1
-
+Open the camera, whether it's on a PC or a USB webcam installed on a Raspberry Pi.
 ## Project_2
 
 ## Project_3
