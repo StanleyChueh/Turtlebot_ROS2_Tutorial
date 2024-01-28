@@ -8,8 +8,12 @@ You can gradually achieve the goal by working on different projects
 # Repository Structure
 ## Project_1
 Open the camera, whether it's on a PC or a USB webcam installed on a Raspberry Pi.
-## Project_2
+![image](https://github.com/StanleyChueh/Turtlebot_ROS2_Tutorial/assets/153347369/50fdd9b3-5a8b-4d0b-9691-320883c6f44c)
 
+## Project_2
+display the centroid coordinates and estimate distances.
+![image](https://github.com/StanleyChueh/Turtlebot_ROS2_Tutorial/assets/153347369/5e6a54c2-452d-46fa-8b9d-661052c950c7)
+![image](https://github.com/StanleyChueh/Turtlebot_ROS2_Tutorial/assets/153347369/09ebf249-eeb2-440a-a24f-40d7b782130d)
 ## Project_3
 
 ## Project_4
